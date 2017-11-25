@@ -21,6 +21,16 @@
   },
   "homepage": "https://github.com/robabby/woodstockdreamer#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "nodemon": "^1.12.1",
+    "superagent": "^3.8.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "public/**",
+      "client/**"
+    ],
+    "delay": "2500"
   }
 }

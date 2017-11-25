@@ -1,4 +1,10 @@
+import ENV from '../config/environment';
+
 export default function() {
+  this.namespace = 'api';
+  const api = ENV.APP.apiURL;
+
+  this.passthrough(`${api}/**`);
 
   // These comments are here to help you get started. Feel free to delete them.
 
