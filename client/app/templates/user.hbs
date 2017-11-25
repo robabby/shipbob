@@ -1,10 +1,29 @@
-{{model.userId}}
-{{model.firstName}}
-{{model.lastName}}
-{{log 'model.orders' model.orders}}
+<div>
+  {{model.userId}}
+  {{model.firstName}}
+  {{model.lastName}}
+</div>
 
+
+<h3>Existing Orders</h3>
 {{#each model.orders as |order|}}
-  {{log order}}
+  {{order.orderId}}
+  {{order.trackingId}}
+  {{order.location}}
 {{/each}}
+
+<h3>Create a new order</h3>
+
+<div>
+  {{paper-input label="Tracking ID" value=trackingId onChange=(action (mut trackingId))}}
+  {{paper-input label="Name" value=locationName onChange=(action (mut locationName))}}
+  {{paper-input label="Street" value=street onChange=(action (mut street))}}
+  {{paper-input label="City" value=city onChange=(action (mut city))}}
+  {{paper-input label="State" value=state onChange=(action (mut state))}}
+  {{paper-input label="Zip Code" value=zip onChange=(action (mut zip))}}
+</div>
+<div>
+  {{#paper-button primary=true raised=true onClick=(action "createOrder" model.userId)}}Create Order{{/paper-button}}
+</div>
 
 {{outlet}}

@@ -8,8 +8,7 @@ module.exports = function(app) {
 
   // Get all users
   app.get('/api/users', function(req, res, next) {
-    console.log('get:/api/users/', req.headers);
-    console.log('get:/api/users/', req.body);
+    console.log('get:api/users/', req.body);
     request
       .get(`${API_URL}/api/users`)
       .set('Content-Type', 'application/json')
@@ -18,8 +17,9 @@ module.exports = function(app) {
       });
   });
 
-  //Get one user
+  // Get a single user
   app.get('/api/users/:userId', function(req, res, next) {
+    console.log('get:api/users/:userId', req.body);
     request
       .get(`${API_URL}/api/users/${req.params.userId}`)
       .set('Content-Type', 'application/json')
@@ -29,9 +29,9 @@ module.exports = function(app) {
       });
   });
 
+  // Create a User
   app.post('/api/users', function(req, res, next) {
-    console.log(req.headers);
-    console.log(req.body);
+    console.log('post:api/users/', req.body);
     request
       .post(`${API_URL}/api/users`)
       .send({
@@ -44,9 +44,9 @@ module.exports = function(app) {
       });
   });
 
+  // Delete a User
   app.delete('/api/users/:userId', function(req, res, next) {
-    console.log('delete:/api/users/', req.headers);
-    console.log('delete:/api/users/', req.body);
+    console.log('delete:api/users/', req.body);
     request
       .delete(`${API_URL}/api/users`)
       .send({
@@ -60,14 +60,39 @@ module.exports = function(app) {
       });
   });
 
+  // Get all Orders for a User
   app.get('/api/orders', function(req, res, next) {
-    console.log('get:/api/orders/', req.headers);
-    console.log('get:/api/orders/', req.body);
-
+    console.log('get:api/orders/', req.body);
     request
       .get(`${API_URL}/api/users/${req.body.id}/orders`)
       .set('Content-Type', 'application/json')
       .end(function(err, response){
+        res.send(response.body);
+      });
+  });
+
+  app.post('/api/orders', function(req, res, next) {
+    console.log('post:api/orders/', req.body);
+    request
+      .post(`${API_URL}/api/users/${req.body.userId}/orders`)
+      .send({
+        'TrackingId': req.body.trackingId,
+        'UserId': req.body.userId,
+        'Location': {
+          'Street': req.body.location.street,
+          'Name': req.body.location.name,
+          'City': req.body.location.city,
+          'State': req.body.location.state,
+          'ZipCode': req.body.location.zipcode
+        }
+      })
+      .set('Content-Type', 'application/json')
+      .end(function(err, response){
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(response);
+        }
         res.send(response.body);
       });
   });

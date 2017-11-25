@@ -1,8 +1,8 @@
-// import ApplicationSerializer from './application';
+import ApplicationSerializer from './application';
 import DS from 'ember-data';
 import Ember from 'ember';
 
-export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
+export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
     orders: { embedded: 'always' }
   },
@@ -13,7 +13,7 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
       type: modelClass.modelName,
       attributes: resourceHash
     };
-    Ember.Logger.info('normalize:user/data/', { data: data });
+    // Ember.Logger.info('normalize:user/data/', { data: data });
     return { data: data };
   }
 });
