@@ -1,6 +1,13 @@
 <h1>OrderBob</h1>
 
 <div>
+  <h3>Create a new customer:</h3>
+  {{input value=firstName placeholder="First Name"}}
+  {{input value=lastName placeholder="Last Name"}}
+  <button {{action 'createUser'}}>Create</button>
+</div>
+
+<div>
   Your customers:
   <ul>
     {{#each model as |user|}}
