@@ -18,9 +18,9 @@ const allowCrossDomain = function(req, res, next) {
   }
 };
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(allowCrossDomain);
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // set our port
 var port = process.env.PORT || 3000;

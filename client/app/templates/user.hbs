@@ -1,1 +1,10 @@
+{{model.userId}}
+{{model.firstName}}
+{{model.lastName}}
+{{log 'model.orders' model.orders}}
+
+{{#each model.orders as |order|}}
+  {{log order}}
+{{/each}}
+
 {{outlet}}

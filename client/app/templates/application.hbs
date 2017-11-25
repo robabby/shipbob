@@ -11,7 +11,12 @@
   Your customers:
   <ul>
     {{#each model as |user|}}
-      <li>{{user.id}} - {{user.firstName}} {{user.lastName}}</li>
+      <li>
+        {{user.id}} -
+        {{user.firstName}} {{user.lastName}} -
+        {{#link-to 'user' user.id}}View Orders{{/link-to}} -
+        <button {{action "deleteUser" user.id}}>Delete User</button>
+      </li>
     {{/each}}
   </ul>
 </div>

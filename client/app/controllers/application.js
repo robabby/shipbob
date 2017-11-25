@@ -19,13 +19,17 @@ export default Controller.extend({
         Ember.Logger.info(err);
       });
     },
+    deleteUser(userId) {
+      Ember.Logger.info('controller:application/deleteUser/userId/', userId);
+      return this.get('store').findRecord('user', userId).then((user) => {
+        Ember.Logger.info(user);
+        user.destroyRecord();
+      });
+    },
     editUser() {
       // this.store.findRecord('user', this.get('userId')).then((game) => {
       //   alert(game.get('title') + ' ' + game.get('id'))
       // })
-    },
-    getUsers() {
-
     },
     createOrder() {
 
