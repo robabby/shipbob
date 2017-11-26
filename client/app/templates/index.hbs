@@ -1,4 +1,4 @@
-<div>
+<div class="ob-create-user">
   <h3>Create a new user:</h3>
   {{paper-input
     disabled=isDisabled
@@ -17,9 +17,9 @@
   {{/paper-button}}
 </div>
 
-<div>
+<div class="ob-user-grid">
   <h3>Your users:</h3>
-  <div class="user-grid">
+  <div>
     {{#each model as |user|}}
       {{user-grid-row user=user isDirty=isDirty}}
     {{/each}}

@@ -1,50 +1,66 @@
-<div>
-  {{model.userId}}
-  {{model.firstName}}
-  {{model.lastName}}
-</div>
-
-
-<h3>Existing Orders</h3>
-{{#each model.orders as |order|}}
-{{log order}}
-  <ul>
-    <li>
-      {{order.orderId}}
-      {{order.trackingId}}
-      {{order.location.name}}
-      {{order.location.street}}
-      {{order.location.city}}
-      {{order.location.state}}
-      {{order.location.zipCode}}
-
-      {{#paper-button
-        iconButton=true
-        href=(href-to "user.order" model.userId order.orderId)
-      }}
-        {{paper-icon "assignment"}}
-      {{/paper-button}}
-
-      {{#paper-button
-        iconButton=true
-        onClick=(action "deleteOrder" order.orderId)
-      }}
-        {{paper-icon "delete"}}
-      {{/paper-button}}
-    </li>
-  </ul>
-{{/each}}
-
 <h3>Create a new order</h3>
 
-<div>
-  {{paper-input label="Tracking ID" value=trackingId onChange=(action (mut trackingId))}}
-  {{paper-input label="Name" value=locationName onChange=(action (mut locationName))}}
-  {{paper-input label="Street" value=street onChange=(action (mut street))}}
-  {{paper-input label="City" value=city onChange=(action (mut city))}}
-  {{paper-input label="State" value=state onChange=(action (mut state))}}
-  {{paper-input label="Zip Code" value=zipCode onChange=(action (mut zipCode))}}
+<div class="ob-create-order">
+  <div>
+    {{paper-input label="Tracking ID" value=trackingId onChange=(action (mut trackingId))}}
+    {{paper-input label="Name" value=locationName onChange=(action (mut locationName))}}
+  </div>
+  <div>
+    {{paper-input label="Street" value=street onChange=(action (mut street))}}
+    {{paper-input label="City" value=city onChange=(action (mut city))}}
+    {{paper-input label="State" value=state onChange=(action (mut state))}}
+    {{paper-input label="Zip Code" value=zipCode onChange=(action (mut zipCode))}}
+  </div>
+  <div>
+    {{#paper-button primary=true raised=true onClick=(action "createOrder" model.userId)}}Create Order{{/paper-button}}
+  </div>
 </div>
-<div>
-  {{#paper-button primary=true raised=true onClick=(action "createOrder" model.userId)}}Create Order{{/paper-button}}
+
+<h3>Existing Orders</h3>
+<div class="ob-order-grid">
+  {{#each model.orders as |order|}}
+    <div class="ob-order-grid__column">
+      <div class="ob-order-gird__column-title">
+        Order ID
+      </div>
+      <div class="ob-order-gird__column-data">
+        {{order.orderId}}
+      </div>
+    </div>
+    <div class="ob-order-grid__column">
+      <div class="ob-order-gird__column-title">
+        Tracking Number
+      </div>
+      <div class="ob-order-gird__column-data">
+        {{#link-to "user.order" model.userId order.orderId}}
+          {{order.trackingId}}
+        {{/link-to}}
+      </div>
+    </div>
+    <div class="ob-order-grid__column">
+      <div class="ob-order-gird__column-title">
+        Actions
+      </div>
+      <div class="ob-order-gird__column-data">
+        {{#paper-button
+          iconButton=true
+          href=(href-to "user.order" model.userId order.orderId)
+        }}
+          {{paper-icon "assignment"}}
+        {{/paper-button}}
+
+        {{#paper-button
+          iconButton=true
+          onClick=(action "deleteOrder" order.orderId)
+        }}
+          {{paper-icon "delete"}}
+        {{/paper-button}}
+      </div>
+    </div>
+    {{!-- {{order.location.name}}
+    {{order.location.street}}
+    {{order.location.city}}
+    {{order.location.state}}
+    {{order.location.zipCode}} --}}
+  {{/each}}
 </div>

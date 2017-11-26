@@ -1,10 +1,46 @@
 @import 'ember-paper';
+@import 'overrides';
+@import 'typography';
+@import 'utilities';
 
-md-input-container .md-errors-spacer {
-  min-height:auto;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700|Rubik:400,700');
+
+/*
+font-family: 'Rubik', sans-serif;
+font-family: 'Open Sans', sans-serif;
+*/
+
+.ob-header {
+  background-color: #2470AF;
+  color:#fff;
+  padding:10px;
+}
+.ob-header__brand a {
+  color: #fff;
+  text-decoration: none;
+  font-family: 'Rubik', sans-serif;
+  font-weight: bold;
+  font-size:28px;
+}
+
+.ob-content {
+  margin:0 auto;
+  max-width:1280px;
+  padding:20px;
 }
 
 .user-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  grid-gap:2vw;
+}
+
+.ob-order-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap:1vw;
+}
+.ob-order-gird__column-title {
+  font-size: 14px;
+  font-weight: bold;
 }
