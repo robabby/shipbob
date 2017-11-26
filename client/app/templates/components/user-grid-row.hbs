@@ -23,7 +23,7 @@
     {{#paper-button
       primary=true
       raised=true
-      onClick=(route-action "updateUser" user.id firstName lastName)
+      onClick=(action "updateUser" user.id)
     }}Save{{/paper-button}}
 
     {{#paper-button
@@ -37,7 +37,7 @@
   {{#paper-button
     warn=true
     raised=true
-    onClick=(route-action "deleteUser" user.id)
+    onClick=(action "deleteUser" user.id)
   }}Delete User{{/paper-button}}
 
   {{#paper-button

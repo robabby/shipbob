@@ -1,0 +1,15 @@
+<div>
+  <h3>Create a new customer:</h3>
+  {{input value=firstName placeholder="First Name"}}
+  {{input value=lastName placeholder="Last Name"}}
+  <button {{action 'createUser'}}>Create</button>
+</div>
+
+<div>
+  <h3>Your customers:</h3>
+  <div class="user-grid">
+    {{#each model as |user|}}
+      {{user-grid-row user=user isDirty=isDirty}}
+    {{/each}}
+  </div>
+</div>

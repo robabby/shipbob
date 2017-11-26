@@ -15,6 +15,23 @@ export default Component.extend({
   actions: {
     toggleEdit() {
       this.toggleProperty('isDisabled');
+    },
+    deleteUser(userId) {
+      return this.get('store').findRecord('user', userId, { reload: true }).then((user) => {
+        user.destroyRecord();
+      });
+    },
+    updateUser(userId) {
+      this.get('store').findRecord('user', userId).then((user)  => {
+        if (this.get('firstName') != this.get('user.firstName')) {
+          user.set('firstName', this.get('firstName'));
+        }
+        if (this.get('lastName') != this.get('user.lastName')) {
+          user.set('lastName', this.get('lastName'));
+        }
+        user.save();
+      });
+      this.toggleProperty('isDisabled');
     }
   }
 });
