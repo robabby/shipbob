@@ -95,11 +95,11 @@ module.exports = function(app) {
         'TrackingId': req.body.trackingId,
         'UserId': req.body.userId,
         'Location': {
-          'Street': req.body.location.street,
-          'Name': req.body.location.name,
-          'City': req.body.location.city,
-          'State': req.body.location.state,
-          'ZipCode': req.body.location.zipcode
+          'Street': req.body.location[0].street,
+          'Name': req.body.location[0].name,
+          'City': req.body.location[0].city,
+          'State': req.body.location[0].state,
+          'ZipCode': req.body.location[0].zipcode
         }
       })
       .set('Content-Type', 'application/json')
