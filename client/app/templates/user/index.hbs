@@ -7,6 +7,7 @@
 
 <h3>Existing Orders</h3>
 {{#each model.orders as |order|}}
+{{log order}}
   <ul>
     <li>
       {{order.orderId}}
@@ -15,12 +16,20 @@
       {{order.location.street}}
       {{order.location.city}}
       {{order.location.state}}
-      {{order.location.zipcode}}
+      {{order.location.zipCode}}
+
       {{#paper-button
         iconButton=true
         href=(href-to "user.order" model.userId order.orderId)
       }}
         {{paper-icon "assignment"}}
+      {{/paper-button}}
+
+      {{#paper-button
+        iconButton=true
+        onClick=(action "deleteOrder" order.orderId)
+      }}
+        {{paper-icon "delete"}}
       {{/paper-button}}
     </li>
   </ul>
@@ -34,7 +43,7 @@
   {{paper-input label="Street" value=street onChange=(action (mut street))}}
   {{paper-input label="City" value=city onChange=(action (mut city))}}
   {{paper-input label="State" value=state onChange=(action (mut state))}}
-  {{paper-input label="Zip Code" value=zip onChange=(action (mut zip))}}
+  {{paper-input label="Zip Code" value=zipCode onChange=(action (mut zipCode))}}
 </div>
 <div>
   {{#paper-button primary=true raised=true onClick=(action "createOrder" model.userId)}}Create Order{{/paper-button}}

@@ -6,26 +6,38 @@ export default Controller.extend({
   street: '555 W Madison',
   city: 'Chicago',
   state: 'IL',
-  zip: '60661',
+  zipCode: '60661',
   actions: {
     createOrder(userId) {
+      let self = this;
       let store = this.get('store');
-      let orderLocation = store.createRecord('location', {
+
+      let orderLocation = {
+        city: this.get('city'),
         name: this.get('locationName'),
         street: this.get('street'),
-        city: this.get('city'),
         state: this.get('state'),
-        zip: this.get('zip')
-      });
+        zipCode: this.get('zipCode')
+      };
 
-      store.createRecord('order', {
+      let order = store.createRecord('order', {
         userId,
         trackingId: this.get('trackingId'),
-        location: [orderLocation]
-      }).save().then(() => {
-        // store.reload();
+        location: orderLocation
+      })
+
+      order.save().then(() => {
+        self.send('refresh');
       }).catch((err) => {
-          Ember.Logger.info(err);
+        Ember.Logger.info(err);
+      });
+    },
+    deleteOrder(orderId) {
+      let self = this;
+      return this.get('store').findRecord('order', orderId, { reload: true }).then((order) => {
+        order.destroyRecord().then(() => {
+          self.send('refresh');
+        });
       });
     }
   }

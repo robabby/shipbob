@@ -23,14 +23,22 @@ export default Component.extend({
     },
     updateUser(userId) {
       this.get('store').findRecord('user', userId, { reload: true }).then((user)  => {
+        let isDirty = true;
+        if (this.get('firstName') === '' || this.get('lastName') === '') {
+          return;
+        }
         if (this.get('firstName') != this.get('user.firstName')) {
+          isDirty = false;
           user.set('firstName', this.get('firstName'));
         }
         if (this.get('lastName') != this.get('user.lastName')) {
+          isDirty = false;
           user.set('lastName', this.get('lastName'));
         }
-        user.save();
-        this.toggleProperty('isDisabled');
+        if (!isDirty) {
+          user.save();
+          this.toggleProperty('isDisabled');
+        }
       });
     }
   }

@@ -1,1 +1,10 @@
 @import 'ember-paper';
+
+md-input-container .md-errors-spacer {
+  min-height:auto;
+}
+
+.user-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+}

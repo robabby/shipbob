@@ -76,7 +76,7 @@ module.exports = function(app) {
       });
   });
 
-  // Get all Orders for a User
+  // GET all Orders for a User
   app.get('/api/orders', function(req, res, next) {
     console.log('get:api/orders/', req.body);
     request
@@ -87,19 +87,32 @@ module.exports = function(app) {
       });
   });
 
+  // GET one Order
+  app.get('/api/orders/:orderId', function(req, res, next) {
+    console.log('get:api/orders/', req.body);
+    request
+      .get(`${API_URL}/api/users/${req.body.id}/orders/${req.params.orderId}`)
+      .set('Content-Type', 'application/json')
+      .end(function(err, response){
+        res.send(response.body);
+      });
+  });
+
+  // POST an Order
   app.post('/api/orders', function(req, res, next) {
     console.log('post:api/orders/', req.body);
+
     request
       .post(`${API_URL}/api/users/${req.body.userId}/orders`)
       .send({
         'TrackingId': req.body.trackingId,
         'UserId': req.body.userId,
         'Location': {
-          'Street': req.body.location[0].street,
-          'Name': req.body.location[0].name,
-          'City': req.body.location[0].city,
-          'State': req.body.location[0].state,
-          'ZipCode': req.body.location[0].zipcode
+          'Street': req.body.location.street,
+          'Name': req.body.location.name,
+          'City': req.body.location.city,
+          'State': req.body.location.state,
+          'ZipCode': req.body.location.zipCode
         }
       })
       .set('Content-Type', 'application/json')
@@ -109,6 +122,34 @@ module.exports = function(app) {
         } else {
           console.log(response);
         }
+        res.send(response.body);
+      });
+  });
+
+  // DELETE an Order for a User
+  app.delete('/api/orders/:orderId', function(req, res, next) {
+    console.log('delete:api/orders/', req.body);
+
+    let { location } = req.body;
+    let { orderId } = req.params;
+
+    request
+      .delete(`${API_URL}/api/users/${req.body.id}/orders`)
+      .send({
+        'orderId': orderId,
+        'trackingId': req.body.trackingId,
+        'userId': req.body.userId,
+        'location': {
+          'locationId': location ? location.id : 0,
+          'Street': location ? location.street : '',
+          'Name': location ? location.name : '',
+          'City': location ? location.city : '',
+          'State': location ? location.state : '',
+          'ZipCode': location ? location.zipCode : ''
+        }
+      })
+      .set('Content-Type', 'application/json')
+      .end(function(err, response){
         res.send(response.body);
       });
   });
