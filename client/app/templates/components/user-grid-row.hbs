@@ -1,0 +1,50 @@
+{{#if user.id}}
+  {{paper-input
+    disabled=isDisabled
+    label="First Name"
+    value=firstName
+    onChange=(action (mut firstName))}}
+  {{paper-input
+    disabled=isDisabled
+    label="Last Name"
+    value=lastName
+    onChange=(action (mut lastName))}}
+
+  {{#if isDisabled}}
+
+    {{#paper-button
+      accent=true
+      raised=true
+      onClick=(action "toggleEdit")
+    }}Edit User{{/paper-button}}
+
+  {{else}}
+
+    {{#paper-button
+      primary=true
+      raised=true
+      onClick=(route-action "updateUser" user.id firstName lastName)
+    }}Save{{/paper-button}}
+
+    {{#paper-button
+      accent=true
+      raised=true
+      onClick=(action "toggleEdit")
+    }}Cancel{{/paper-button}}
+
+  {{/if}}
+
+  {{#paper-button
+    warn=true
+    raised=true
+    onClick=(route-action "deleteUser" user.id)
+  }}Delete User{{/paper-button}}
+
+  {{#paper-button
+    primary=true
+    raised=true
+    href=(href-to "user" user.id)
+  }}View Orders{{/paper-button}}
+{{else}}
+  {{paper-progress-circular class="md-hue-2" diameter=25}}
+{{/if}}

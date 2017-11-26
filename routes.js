@@ -44,6 +44,22 @@ module.exports = function(app) {
       });
   });
 
+  // Edit a User
+  app.put('/api/users/:userId', function(req, res, next) {
+    console.log('put:api/users/', req.body);
+    request
+      .put(`${API_URL}/api/users`)
+      .send({
+        'UserId': req.body.userId,
+        'FirstName': req.body.firstName,
+        'LastName': req.body.lastName
+      })
+      .set('Content-Type', 'application/json')
+      .end(function(err, response, body){
+        res.send(response.body);
+      });
+  });
+
   // Delete a User
   app.delete('/api/users/:userId', function(req, res, next) {
     console.log('delete:api/users/', req.body);

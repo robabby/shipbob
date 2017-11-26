@@ -2624,6 +2624,13 @@ ember-getowner-polyfill@^2.0.0:
     ember-cli-version-checker "^2.1.0"
     ember-factory-for-polyfill "^1.3.1"
 
+ember-href-to@^1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/ember-href-to/-/ember-href-to-1.15.1.tgz#1ba20ec201245c7cae7e2aa3eec50eb2aa25b729"
+  dependencies:
+    ember-cli-babel "^6.8.2"
+    ember-router-service-polyfill "^1.0.2"
+
 ember-inflector@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/ember-inflector/-/ember-inflector-2.1.0.tgz#afcb92d022a4eab58f08ff4578eafc3a1de2d09b"
@@ -2725,11 +2732,24 @@ ember-rfc176-data@^0.3.0, ember-rfc176-data@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/ember-rfc176-data/-/ember-rfc176-data-0.3.1.tgz#6a5a4b8b82ec3af34f3010965fa96b936ca94519"
 
+ember-route-action-helper@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/ember-route-action-helper/-/ember-route-action-helper-2.0.6.tgz#1d50454350d7112be326ab44058f06cf291d5fd9"
+  dependencies:
+    ember-cli-babel "^6.8.1"
+    ember-getowner-polyfill "^2.0.0"
+
 ember-router-generator@^1.0.0, ember-router-generator@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/ember-router-generator/-/ember-router-generator-1.2.3.tgz#8ed2ca86ff323363120fc14278191e9e8f1315ee"
   dependencies:
     recast "^0.11.3"
+
+ember-router-service-polyfill@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ember-router-service-polyfill/-/ember-router-service-polyfill-1.0.2.tgz#6e5565f196fa7045cbe06a6fab861f9e766fe62a"
+  dependencies:
+    ember-cli-babel "^6.8.2"
 
 ember-runtime-enumerable-includes-polyfill@^2.0.0:
   version "2.1.0"

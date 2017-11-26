@@ -1,6 +1,7 @@
 module.exports = {
   globals: {
     server: true,
+    Ember: true
   },
   root: true,
   parserOptions: {
