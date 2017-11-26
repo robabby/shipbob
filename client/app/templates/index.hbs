@@ -5,20 +5,12 @@
     label="First Name"
     value=firstName
     onChange=(action (mut firstName))
-    required=true
-    errorMessages=(hash
-      required="First Name is required."
-    )
   }}
   {{paper-input
     disabled=isDisabled
     label="Last Name"
     value=lastName
     onChange=(action (mut lastName))
-    required=true
-    errorMessages=(hash
-      required="Last Name is required."
-    )
   }}
   {{#paper-button raised=true onClick=(action "createUser") iconButton=true}}
     {{paper-icon "add"}}
