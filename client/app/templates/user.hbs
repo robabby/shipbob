@@ -7,9 +7,17 @@
 
 <h3>Existing Orders</h3>
 {{#each model.orders as |order|}}
-  {{order.orderId}}
-  {{order.trackingId}}
-  {{order.location}}
+  <ul>
+    <li>
+      {{order.orderId}}
+      {{order.trackingId}}
+      {{order.location.name}}
+      {{order.location.street}}
+      {{order.location.city}}
+      {{order.location.state}}
+      {{order.location.zipcode}}
+    </li>
+  </ul>
 {{/each}}
 
 <h3>Create a new order</h3>

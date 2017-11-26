@@ -3,7 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default Component.extend({
   store: service(),
-  className: ['user-grid__row'],
+  classNames: ['user-grid__row'],
   firstName: null,
   lastName: null,
   isDisabled: true,
@@ -22,7 +22,7 @@ export default Component.extend({
       });
     },
     updateUser(userId) {
-      this.get('store').findRecord('user', userId).then((user)  => {
+      this.get('store').findRecord('user', userId, { reload: true }).then((user)  => {
         if (this.get('firstName') != this.get('user.firstName')) {
           user.set('firstName', this.get('firstName'));
         }
@@ -30,8 +30,8 @@ export default Component.extend({
           user.set('lastName', this.get('lastName'));
         }
         user.save();
+        this.toggleProperty('isDisabled');
       });
-      this.toggleProperty('isDisabled');
     }
   }
 });

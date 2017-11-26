@@ -12,39 +12,41 @@
 
   {{#if isDisabled}}
 
-    {{#paper-button
-      accent=true
-      raised=true
-      onClick=(action "toggleEdit")
-    }}Edit User{{/paper-button}}
+    {{#paper-button onClick=(action "toggleEdit") iconButton=true}}
+      {{paper-icon "edit"}}
+    {{/paper-button}}
 
   {{else}}
 
     {{#paper-button
-      primary=true
-      raised=true
       onClick=(action "updateUser" user.id)
-    }}Save{{/paper-button}}
+      iconButton=true
+    }}
+      {{paper-icon "check"}}
+    {{/paper-button}}
 
     {{#paper-button
-      accent=true
-      raised=true
+      iconButton=true
       onClick=(action "toggleEdit")
-    }}Cancel{{/paper-button}}
+    }}
+      {{paper-icon "clear"}}
+    {{/paper-button}}
 
   {{/if}}
 
   {{#paper-button
-    warn=true
-    raised=true
-    onClick=(action "deleteUser" user.id)
-  }}Delete User{{/paper-button}}
+    iconButton=true
+    href=(href-to "user" user.id)
+  }}
+    {{paper-icon "assignment"}}
+  {{/paper-button}}
 
   {{#paper-button
-    primary=true
-    raised=true
-    href=(href-to "user" user.id)
-  }}View Orders{{/paper-button}}
+    iconButton=true
+    onClick=(action "deleteUser" user.id)
+  }}
+    {{paper-icon "delete"}}
+  {{/paper-button}}
 {{else}}
   {{paper-progress-circular class="md-hue-2" diameter=25}}
 {{/if}}
