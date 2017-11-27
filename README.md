@@ -35,5 +35,7 @@ View and manage your orders on the internet!
 - [ ] Better UI & better UX considerations
 - [ ] Mobile-first
 
+---
+
 #### Note:
 I am pre-populating the Order Details form intentionally. You can overwrite any of the values if you wish.
