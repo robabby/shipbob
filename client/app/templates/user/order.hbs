@@ -1,3 +1,13 @@
 <h3>Order Details</h3>
 
-{{log model.user}}
+Order User:
+{{model.user.firstName}} {{model.user.lastName}}
+
+{{model.order.trackingId}}
+{{model.order.location.locationId}}
+{{model.order.location.name}}
+{{model.order.location.city}}
+{{model.order.location.state}}
+{{model.order.location.street}}
+{{model.order.location.zipCode}}
+{{model.order.location.orderId}}

@@ -19,9 +19,7 @@
 
 <div class="ob-user-grid">
   <h3>Your users:</h3>
-  <div>
-    {{#each model as |user|}}
-      {{user-grid-row user=user isDirty=isDirty}}
-    {{/each}}
-  </div>
+  {{#each model as |user|}}
+    {{user-grid-row user=user isDirty=isDirty}}
+  {{/each}}
 </div>

@@ -91,9 +91,9 @@ module.exports = function(app) {
   // GET one Order
   app.get('/api/orders/:orderId', function(req, res, next) {
     console.log('get:api/orders/:orderId', req.body);
-    console.log(`get:${API_URL}/api/users/${req.query.userId}/orders/${req.query.orderId}`)
+    console.log(`get:${API_URL}/api/users/${req.query.include}/orders/${req.params.orderId}`)
     request
-      .get(`${API_URL}/api/users/${req.query.userId}/orders/${req.query.orderId}`)
+      .get(`${API_URL}/api/users/${req.query.include}/orders/${req.params.orderId}`)
       .set('Content-Type', 'application/json')
       .end(function(err, response){
         res.send(response.body);
