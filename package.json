@@ -12,14 +12,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/robabby/woodstockdreamer.git"
+    "url": "git+https://github.com/robabby/shipbob.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/robabby/woodstockdreamer/issues"
+    "url": "https://github.com/robabby/shipbob/issues"
   },
-  "homepage": "https://github.com/robabby/woodstockdreamer#readme",
+  "homepage": "https://github.com/robabby/shipbob#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
