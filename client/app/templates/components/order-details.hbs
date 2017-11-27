@@ -1,4 +1,4 @@
-<div class="ob-order-details__title-area">
+<div class="ob-page__title-area">
   <div>
     <h2>Order Details</h2>
   </div>
@@ -23,18 +23,6 @@
 
 <div class="ob-order-details__user-info">
   <h3>Order Owner: {{#link-to "user" user.id}}{{user.firstName}} {{user.lastName}}{{/link-to}}</h3>
-  {{!-- {{paper-input
-    disabled=isDisabled
-    label="First Name"
-    value=firstName
-    onChange=(action (mut firstName))
-  }}
-  {{paper-input
-    disabled=isDisabled
-    label="Last Name"
-    value=lastName
-    onChange=(action (mut lastName))
-  }} --}}
 </div>
 
 <h3>Order Info:</h3>
@@ -51,8 +39,6 @@
       value=locationName
       onChange=(action (mut locationName))
     }}
-  </div>
-  <div>
     {{paper-input
       disabled=isDisabled
       label="Street Address"
@@ -80,29 +66,30 @@
       onChange=(action (mut zipCode))
     }}
   </div>
-  {{#unless isDisabled}}
-    {{#paper-button
-      onClick=(action "updateOrder" order.orderId)
-      primary=true
-      raised=true
-    }}
-      Save
-    {{/paper-button}}
+  {{#paper-button
+    onClick=(action "updateOrder" order.orderId)
+    primary=true
+    raised=true
+    disabled=isDisabled
+  }}
+    Save
+  {{/paper-button}}
 
-    {{#paper-button
-      onClick=(action "cancelEdit")
-      accent=true
-      raised=true
-    }}
-      Cancel
-    {{/paper-button}}
+  {{#paper-button
+    onClick=(action "cancelEdit")
+    accent=true
+    raised=true
+    disabled=isDisabled
+  }}
+    Cancel
+  {{/paper-button}}
 
-    {{#paper-button
-      warn=true
-      raised=true
-      onClick=(action "deleteOrder" order.orderId)
-    }}
-      Delete Order
-    {{/paper-button}}
-  {{/unless}}
+  {{#paper-button
+    warn=true
+    raised=true
+    onClick=(action "deleteOrder" order.orderId)
+    disabled=isDisabled
+  }}
+    Delete Order
+  {{/paper-button}}
 </div>

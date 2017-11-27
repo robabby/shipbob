@@ -3,6 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default Component.extend({
   store: service(),
+  router: service(),
   classNames: ['ob-order-details'],
   userId: null,
   firstName: null,
@@ -58,9 +59,11 @@ export default Component.extend({
         this.toggleProperty('isDisabled');
       });
     },
-    deleteOrder(userId) {
-      return this.get('store').findRecord('user', userId, { reload: true }).then((user) => {
-        user.destroyRecord();
+    deleteOrder(orderId) {
+      this.get('store').findRecord('order', orderId, { reload: true }).then((order) => {
+        order.destroyRecord().then(() => {
+          this.get('router').transitionTo('user', this.get('userId'));
+        });
       });
     }
   }

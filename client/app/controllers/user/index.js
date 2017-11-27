@@ -1,12 +1,16 @@
 import Controller from '@ember/controller';
+const { $ } = Ember;
 
 export default Controller.extend({
+  showToast: false,
+  toastDuration: 2000,
   trackingId: '',
   locationName: 'ShipBob',
   street: '555 W Madison',
   city: 'Chicago',
   state: 'IL',
   zipCode: '60661',
+  createNewOrder: false,
   actions: {
     createOrder(userId) {
       let self = this;
@@ -28,6 +32,9 @@ export default Controller.extend({
 
       order.save().then(() => {
         self.send('refresh');
+        this.set('showToast', true)
+        this.set('createNewOrder', false);
+        this.set('trackingId', '');
       }).catch((err) => {
         Ember.Logger.info(err);
       });
@@ -39,6 +46,18 @@ export default Controller.extend({
           self.send('refresh');
         });
       });
+    },
+    /* Dialog */
+    openDialog(event) {
+      this.set('dialogOrigin', $(event.currentTarget));
+      this.set('createNewOrder', true);
+    },
+    closeDialog() {
+      this.set('createNewOrder', false);
+    },
+    /* Toast */
+    closeToast() {
+      this.set('showToast', false);
     }
   }
 });

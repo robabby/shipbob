@@ -1,53 +1,55 @@
-<div>
-  {{#if isDisabled}}
-      <span>{{#link-to "user" user.id}}{{firstName}} {{lastName}}{{/link-to}}</span>
-  {{else}}
-    {{paper-input
-      disabled=isDisabled
-      label="First Name"
-      value=firstName
-      onChange=(action (mut firstName))
-      required=true
-      errorMessages=(hash
-        required="First Name is required."
-      )
-    }}
-    {{paper-input
-      disabled=isDisabled
-      label="Last Name"
-      value=lastName
-      onChange=(action (mut lastName))
-      required=true
-      errorMessages=(hash
-        required="Last Name is required."
-      )
-    }}
-  {{/if}}
-</div>
-<div>
-  {{#if isDisabled}}
+{{#if user.id}}
+  <div>
+    {{#if isDisabled}}
+        <span>{{#link-to "user" user.id}}{{firstName}} {{lastName}}{{/link-to}}</span>
+    {{else}}
+      {{paper-input
+        disabled=isDisabled
+        label="First Name"
+        value=firstName
+        onChange=(action (mut firstName))
+        required=true
+        errorMessages=(hash
+          required="First Name is required."
+        )
+      }}
+      {{paper-input
+        disabled=isDisabled
+        label="Last Name"
+        value=lastName
+        onChange=(action (mut lastName))
+        required=true
+        errorMessages=(hash
+          required="Last Name is required."
+        )
+      }}
+    {{/if}}
+  </div>
+  <div>
+    {{#if isDisabled}}
 
-    {{#paper-button onClick=(action "toggleEdit") iconButton=true}}
-      {{paper-icon "edit"}}
+      {{#paper-button onClick=(action "toggleEdit") iconButton=true}}
+        {{paper-icon "edit"}}
+      {{/paper-button}}
+
+    {{else}}
+
+      {{#paper-button onClick=(action "updateUser" user.id) iconButton=true}}
+        {{paper-icon "check"}}
+      {{/paper-button}}
+
+      {{#paper-button iconButton=true onClick=(action "toggleEdit")}}
+        {{paper-icon "clear"}}
+      {{/paper-button}}
+
+    {{/if}}
+
+    {{#paper-button primary=true iconButton=true href=(href-to "user" user.id)}}
+      {{paper-icon "assignment"}}
     {{/paper-button}}
 
-  {{else}}
-
-    {{#paper-button onClick=(action "updateUser" user.id) iconButton=true}}
-      {{paper-icon "check"}}
+    {{#paper-button warn=true iconButton=true onClick=(action "deleteUser" user.id)}}
+      {{paper-icon "delete"}}
     {{/paper-button}}
-
-    {{#paper-button iconButton=true onClick=(action "toggleEdit")}}
-      {{paper-icon "clear"}}
-    {{/paper-button}}
-
-  {{/if}}
-
-  {{#paper-button primary=true iconButton=true href=(href-to "user" user.id)}}
-    {{paper-icon "assignment"}}
-  {{/paper-button}}
-
-  {{#paper-button warn=true iconButton=true onClick=(action "deleteUser" user.id)}}
-    {{paper-icon "delete"}}
-  {{/paper-button}}
-</div>
+  </div>
+{{/if}}

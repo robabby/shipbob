@@ -1,66 +1,121 @@
-<h3>Create a new order</h3>
+{{#paper-button
+  iconButton=true
+  href=(href-to "index")
+}}
+  {{paper-icon "arrow_back"}}
+{{/paper-button}}
 
-<div class="ob-create-order">
+<div class="ob-page__title-area">
   <div>
-    {{paper-input label="Tracking ID" value=trackingId onChange=(action (mut trackingId))}}
-    {{paper-input label="Name" value=locationName onChange=(action (mut locationName))}}
+    <h2>{{model.user.firstName}}'s Existing Orders</h2>
   </div>
   <div>
-    {{paper-input label="Street" value=street onChange=(action (mut street))}}
-    {{paper-input label="City" value=city onChange=(action (mut city))}}
-    {{paper-input label="State" value=state onChange=(action (mut state))}}
-    {{paper-input label="Zip Code" value=zipCode onChange=(action (mut zipCode))}}
-  </div>
-  <div>
-    {{#paper-button primary=true raised=true onClick=(action "createOrder" model.user.userId)}}Create Order{{/paper-button}}
+    {{#paper-button
+      onClick=(action "openDialog")
+      primary=true
+      raised=true
+    }}Create an Order{{/paper-button}}
   </div>
 </div>
 
-<h3>Existing Orders</h3>
-<div class="ob-order-grid">
-  {{#each model.orders as |order|}}
-    <div class="ob-order-grid__column">
-      <div class="ob-order-gird__column-title">
-        Order ID
-      </div>
-      <div class="ob-order-gird__column-data">
-        {{order.orderId}}
-      </div>
-    </div>
-    <div class="ob-order-grid__column">
-      <div class="ob-order-gird__column-title">
-        Tracking Number
-      </div>
-      <div class="ob-order-gird__column-data">
-        {{#link-to "user.order" model.user.userId order.orderId}}
-          {{order.trackingId}}
-        {{/link-to}}
-      </div>
-    </div>
-    <div class="ob-order-grid__column">
-      <div class="ob-order-gird__column-title">
-        Actions
-      </div>
-      <div class="ob-order-gird__column-data">
-        {{#paper-button
-          iconButton=true
-          href=(href-to "user.order" model.user.userId order.orderId)
-        }}
-          {{paper-icon "assignment"}}
-        {{/paper-button}}
+<div class="ob-orders-grid">
+  {{#if model.orders}}
+    {{#each model.orders as |order|}}
+      <div class="ob-order-grid__row">
+        <div class="ob-order-grid__column">
+          <div class="ob-order-gird__column-title">
+            Order ID
+          </div>
+          <div class="ob-order-gird__column-data">
+            {{order.orderId}}
+          </div>
+        </div>
+        <div class="ob-order-grid__column">
+          <div class="ob-order-gird__column-title">
+            Tracking Number
+          </div>
+          <div class="ob-order-gird__column-data">
+            {{#link-to "user.order" model.user.userId order.orderId}}
+            {{order.trackingId}}
+            {{/link-to}}
+          </div>
+        </div>
+        <div class="ob-order-grid__column"> {{!-- I'm empty --}} </div>
+        <div class="ob-order-grid__column">
+          <div class="ob-order-gird__column-title">
+            Actions
+          </div>
+          <div class="ob-order-gird__column-data">
+            {{#paper-button
+              iconButton=true
+              href=(href-to "user.order" model.user.userId order.orderId)
+            }}
+              {{paper-icon "assignment"}}
+            {{/paper-button}}
 
+            {{#paper-button
+              iconButton=true
+              onClick=(action "deleteOrder" order.orderId)
+            }}
+            {{paper-icon "delete"}}
+            {{/paper-button}}
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  {{else}}
+    <div class="ob-orders-grid__blank-state">
+      <h3 class="blank-state__title">It looks like you don't have any orders for this user</h3>
+      <div>
         {{#paper-button
-          iconButton=true
-          onClick=(action "deleteOrder" order.orderId)
-        }}
-          {{paper-icon "delete"}}
-        {{/paper-button}}
+          onClick=(action "openDialog")
+          primary=true
+          raised=true
+        }}Make one{{/paper-button}}
       </div>
     </div>
-    {{!-- {{order.location.name}}
-    {{order.location.street}}
-    {{order.location.city}}
-    {{order.location.state}}
-    {{order.location.zipCode}} --}}
-  {{/each}}
+  {{/if}}
 </div>
+
+{{#if createNewOrder}}
+  {{#paper-dialog class="flex-77" onClose=(action "closeDialog") origin=dialogOrigin clickOutsideToClose=true}}
+    {{#paper-toolbar}}
+      {{#paper-toolbar-tools}}
+        <h2>Create a New Order</h2>
+        <span class="flex"></span>
+        {{#paper-button iconButton=true onClick=(action "closeDialog" "cancel")}}{{paper-icon icon="close"}}{{/paper-button}}
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+
+    {{#paper-dialog-content}}
+    <div class="ob-create-order">
+      <div>
+        {{paper-input label="Tracking ID" value=trackingId onChange=(action (mut trackingId))}}
+        {{paper-input label="Name" value=locationName onChange=(action (mut locationName))}}
+      </div>
+      <div>
+        {{paper-input label="Street" value=street onChange=(action (mut street))}}
+        {{paper-input label="City" value=city onChange=(action (mut city))}}
+        {{paper-input label="State" value=state onChange=(action (mut state))}}
+        {{paper-input label="Zip Code" value=zipCode onChange=(action (mut zipCode))}}
+      </div>
+      {{!-- <div>
+        {{#paper-button primary=true raised=true onClick=(action "createOrder" model.user.userId)}}Create Order{{/paper-button}}
+      </div> --}}
+    </div>
+    {{/paper-dialog-content}}
+
+    {{#paper-dialog-actions class="layout-row"}}
+      <span class="flex"></span>
+      {{#paper-button onClick=(action "closeDialog")}}Cancel{{/paper-button}}
+      {{#paper-button onClick=(action "createOrder" model.user.userId)}}OK{{/paper-button}}
+    {{/paper-dialog-actions}}
+  {{/paper-dialog}}
+{{/if}}
+
+
+{{#if showToast}}
+  {{#paper-toast duration=toastDuration position=(concat "bottom left") capsule=capsule swipeToClose=swipeToClose onClose=(action "closeToast") as |toast|}}
+    {{#toast.text}}Order Created Successfully{{/toast.text}}
+  {{/paper-toast}}
+{{/if}}
