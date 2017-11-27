@@ -13,6 +13,7 @@ module.exports = function(app) {
       .get(`${API_URL}/api/users`)
       .set('Content-Type', 'application/json')
       .end(function(err, response){
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -24,7 +25,7 @@ module.exports = function(app) {
       .get(`${API_URL}/api/users/${req.params.userId}`)
       .set('Content-Type', 'application/json')
       .end(function(err, response){
-        console.log('get:/api/users/:userId', response.body);
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -40,6 +41,7 @@ module.exports = function(app) {
       })
       .set('Content-Type', 'application/json')
       .end(function(err, response, body){
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -56,6 +58,7 @@ module.exports = function(app) {
       })
       .set('Content-Type', 'application/json')
       .end(function(err, response, body){
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -72,6 +75,7 @@ module.exports = function(app) {
       })
       .set('Content-Type', 'application/json')
       .end(function(err, response){
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -83,7 +87,7 @@ module.exports = function(app) {
       .get(`${API_URL}/api/users/${req.query.userId}/orders`)
       .set('Content-Type', 'application/json')
       .end(function(err, response) {
-        console.log(response.body);
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -91,11 +95,11 @@ module.exports = function(app) {
   // GET one Order
   app.get('/api/orders/:orderId', function(req, res, next) {
     console.log('get:api/orders/:orderId', req.body);
-    console.log(`get:${API_URL}/api/users/${req.query.include}/orders/${req.params.orderId}`)
     request
       .get(`${API_URL}/api/users/${req.query.include}/orders/${req.params.orderId}`)
       .set('Content-Type', 'application/json')
       .end(function(err, response){
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -103,8 +107,6 @@ module.exports = function(app) {
   // POST an Order
   app.post('/api/orders', function(req, res, next) {
     console.log('post:api/orders/', req.body);
-    console.log(`post:${API_URL}/api/users/${req.body.userId}/orders`);
-
     request
       .post(`${API_URL}/api/users/${req.body.userId}/orders`)
       .send({
@@ -120,11 +122,7 @@ module.exports = function(app) {
       })
       .set('Content-Type', 'application/json')
       .end(function(err, response){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log(response.body);
-        }
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -132,8 +130,6 @@ module.exports = function(app) {
   // PUT an Order
   app.put('/api/orders/:orderId', function(req, res, next) {
     console.log('put:api/orders/', req.body);
-    console.log(`put:${API_URL}/api/users/${req.body.userId}/orders`);
-
     request
       .put(`${API_URL}/api/users/${req.body.userId}/orders`)
       .send({
@@ -152,10 +148,7 @@ module.exports = function(app) {
       })
       .set('Content-Type', 'application/json')
       .end(function(err, response){
-        if (err) {
-          console.log(err);
-        }
-        console.log(response.body);
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
@@ -184,6 +177,7 @@ module.exports = function(app) {
       })
       .set('Content-Type', 'application/json')
       .end(function(err, response){
+        console.log(err, response.body);
         res.send(response.body);
       });
   });
