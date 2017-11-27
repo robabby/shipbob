@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import ENV from '../config/environment';
 
-export default DS.RESTAdapter.extend({
+export default DS.JSONAPIAdapter.extend({
   namespace: 'api',
   host: ENV.APP.apiURL,
   headers: {
