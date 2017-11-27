@@ -3,7 +3,7 @@ import { inject as service } from "@ember/service";
 
 export default Component.extend({
   store: service(),
-  classNames: ['user-grid__row'],
+  classNames: ['user-details'],
   firstName: null,
   lastName: null,
   isDisabled: true,
