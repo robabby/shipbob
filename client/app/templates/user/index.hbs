@@ -12,7 +12,7 @@
     {{paper-input label="Zip Code" value=zipCode onChange=(action (mut zipCode))}}
   </div>
   <div>
-    {{#paper-button primary=true raised=true onClick=(action "createOrder" model.userId)}}Create Order{{/paper-button}}
+    {{#paper-button primary=true raised=true onClick=(action "createOrder" model.user.userId)}}Create Order{{/paper-button}}
   </div>
 </div>
 
@@ -32,7 +32,7 @@
         Tracking Number
       </div>
       <div class="ob-order-gird__column-data">
-        {{#link-to "user.order" model.userId order.orderId}}
+        {{#link-to "user.order" model.user.userId order.orderId}}
           {{order.trackingId}}
         {{/link-to}}
       </div>
@@ -44,7 +44,7 @@
       <div class="ob-order-gird__column-data">
         {{#paper-button
           iconButton=true
-          href=(href-to "user.order" model.userId order.orderId)
+          href=(href-to "user.order" model.user.userId order.orderId)
         }}
           {{paper-icon "assignment"}}
         {{/paper-button}}

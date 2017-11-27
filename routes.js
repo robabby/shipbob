@@ -77,21 +77,23 @@ module.exports = function(app) {
   });
 
   // GET all Orders for a User
-  app.get('/api/orders', function(req, res, next) {
+  app.get('/api/orders/', function(req, res, next) {
     console.log('get:api/orders/', req.body);
     request
-      .get(`${API_URL}/api/users/${req.body.id}/orders`)
+      .get(`${API_URL}/api/users/${req.query.userId}/orders`)
       .set('Content-Type', 'application/json')
-      .end(function(err, response){
+      .end(function(err, response) {
+        console.log(response.body);
         res.send(response.body);
       });
   });
 
   // GET one Order
   app.get('/api/orders/:orderId', function(req, res, next) {
-    console.log('get:api/orders/', req.body);
+    console.log('get:api/orders/:orderId', req.body);
+    console.log(`get:${API_URL}/api/users/${req.query.userId}/orders/${req.query.orderId}`)
     request
-      .get(`${API_URL}/api/users/${req.body.id}/orders/${req.params.orderId}`)
+      .get(`${API_URL}/api/users/${req.query.userId}/orders/${req.query.orderId}`)
       .set('Content-Type', 'application/json')
       .end(function(err, response){
         res.send(response.body);
@@ -101,6 +103,7 @@ module.exports = function(app) {
   // POST an Order
   app.post('/api/orders', function(req, res, next) {
     console.log('post:api/orders/', req.body);
+    console.log(`post:${API_URL}/api/users/${req.body.userId}/orders`);
 
     request
       .post(`${API_URL}/api/users/${req.body.userId}/orders`)
@@ -120,7 +123,7 @@ module.exports = function(app) {
         if (err) {
           console.log(err);
         } else {
-          console.log(response);
+          console.log(response.body);
         }
         res.send(response.body);
       });
