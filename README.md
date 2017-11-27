@@ -2,7 +2,7 @@
 ---
 View and manage your orders on the internet!
 
-[View the App](http://shipbob.robabby.com)
+<!-- [View the App](http://shipbob.robabby.com) -->
 
 ### How to run the app locally
 
