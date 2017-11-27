@@ -18,16 +18,22 @@ View and manage your orders on the internet!
 * cd into the client directory `cd shipbob/client`
 * Build the client files `ember build --environment=production --output-path=../public/`
 * Build the Docker container `docker build -t robabby/shipbob .`
-* Run it `docker run -p 8090:3000 -d robabby/shipbob:latest`
+* Run it `docker run -p 8080:3000 -d robabby/shipbob:latest`
 
 ### Other things I would have done
 
 - [ ] Write tests
+- [ ] Set up an [ember-cli-mirage](http://www.ember-cli-mirage.com/) server to fully mock out the API
+- [ ] Implemented [ember-fastboot](https://www.ember-fastboot.com/) for server-side rendering
 - [ ] Clean input data
 - [ ] Form Validation
 - [ ] Pagination on data grids
 - [ ] filter to show which orders have incomplete data using computed
 - [ ] Notification service
 - [ ] Provide confirmation dialogs when performing a destructive action
-- [ ] Set up a mirage server to fully mock out the API
-- [ ] Understand what the “Use ‘store.findRecord()” warning is all abut…
+- [ ] Understand what the “Use store.findRecord()” console warning is all about
+- [ ] Better UI & better UX considerations
+- [ ] Mobile-first
+
+#### Note:
+I am pre-populating the Order Details form intentionally. You can overwrite any of the values if you wish.
