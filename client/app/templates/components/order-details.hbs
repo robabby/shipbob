@@ -1,0 +1,108 @@
+<div class="ob-order-details__title-area">
+  <div>
+    <h2>Order Details</h2>
+  </div>
+  <div>
+    {{#if isDisabled}}
+      {{#paper-button
+        class="ob-order-details__edit"
+        onClick=(action "toggleEdit")
+        primary=true
+        raised=true
+      }}Edit{{/paper-button}}
+    {{else}}
+      {{#paper-button
+        class="ob-order-details__edit"
+        onClick=(action "cancelEdit")
+        accent=true
+        raised=true
+      }}Cancel{{/paper-button}}
+    {{/if}}
+  </div>
+</div>
+
+<div class="ob-order-details__user-info">
+  <h3>Order Owner: {{#link-to "user" user.id}}{{user.firstName}} {{user.lastName}}{{/link-to}}</h3>
+  {{!-- {{paper-input
+    disabled=isDisabled
+    label="First Name"
+    value=firstName
+    onChange=(action (mut firstName))
+  }}
+  {{paper-input
+    disabled=isDisabled
+    label="Last Name"
+    value=lastName
+    onChange=(action (mut lastName))
+  }} --}}
+</div>
+
+<h3>Order Info:</h3>
+<div class="ob-order-details__order-info">
+  <div>
+    <p><strong>Order ID:</strong> <span>{{order.orderId}}</span></p>
+    <p><strong>Tracking Number:</strong> <span>{{order.trackingId}}</span></p>
+  </div>
+  {{paper-divider}}<br />
+  <div>
+    {{paper-input
+      disabled=isDisabled
+      label="Name"
+      value=locationName
+      onChange=(action (mut locationName))
+    }}
+  </div>
+  <div>
+    {{paper-input
+      disabled=isDisabled
+      label="Street Address"
+      value=street
+      onChange=(action (mut street))
+    }}
+  </div>
+  <div>
+    {{paper-input
+      disabled=isDisabled
+      label="City"
+      value=city
+      onChange=(action (mut city))
+    }}
+    {{paper-input
+      disabled=isDisabled
+      label="State"
+      value=state
+      onChange=(action (mut state))
+    }}
+    {{paper-input
+      disabled=isDisabled
+      label="Zip"
+      value=zipCode
+      onChange=(action (mut zipCode))
+    }}
+  </div>
+  {{#unless isDisabled}}
+    {{#paper-button
+      onClick=(action "updateOrder" order.orderId)
+      primary=true
+      raised=true
+    }}
+      Save
+    {{/paper-button}}
+
+    {{#paper-button
+      onClick=(action "cancelEdit")
+      accent=true
+      raised=true
+    }}
+      Cancel
+    {{/paper-button}}
+
+    {{#paper-button
+      warn=true
+      raised=true
+      onClick=(action "deleteOrder" order.orderId)
+    }}
+      Delete Order
+    {{/paper-button}}
+  {{/unless}}
+</div>

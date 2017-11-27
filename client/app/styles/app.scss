@@ -44,3 +44,10 @@ font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   font-weight: bold;
 }
+
+.ob-order-details__title-area {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

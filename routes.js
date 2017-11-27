@@ -129,6 +129,37 @@ module.exports = function(app) {
       });
   });
 
+  // PUT an Order
+  app.put('/api/orders/:orderId', function(req, res, next) {
+    console.log('put:api/orders/', req.body);
+    console.log(`put:${API_URL}/api/users/${req.body.userId}/orders`);
+
+    request
+      .put(`${API_URL}/api/users/${req.body.userId}/orders`)
+      .send({
+        'orderId': req.body.orderId,
+        'trackingId': req.body.trackingId,
+        'userId': req.body.userId,
+        'location': {
+          'locationId': req.body.location.locationId,
+          'name': req.body.location.name,
+          'city': req.body.location.city,
+          'state': req.body.location.state,
+          'street': req.body.location.street,
+          'zipCode': req.body.location.zipCode,
+          'orderId': req.body.location.orderId
+        }
+      })
+      .set('Content-Type', 'application/json')
+      .end(function(err, response){
+        if (err) {
+          console.log(err);
+        }
+        console.log(response.body);
+        res.send(response.body);
+      });
+  });
+
   // DELETE an Order for a User
   app.delete('/api/orders/:orderId', function(req, res, next) {
     console.log('delete:api/orders/', req.body);

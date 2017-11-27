@@ -1,5 +1,4 @@
 import Route from '@ember/routing/route';
-import { computed } from '@ember/object';
 
 export default Route.extend({
   model(params) {
@@ -8,7 +7,7 @@ export default Route.extend({
 
     return Ember.RSVP.hash({
       user: this.store.peekRecord('user', userId),
-      order: this.store.findRecord('order', orderId, { include: userId })
+      order: this.store.findRecord('order', orderId, { include: userId, reload: true })
     });
   }
 });
