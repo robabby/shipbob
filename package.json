@@ -1,5 +1,5 @@
 {
-  "name": "woodstockdreamer",
+  "name": "shipbob",
   "version": "1.0.0",
   "description": "Well, hello.",
   "main": "server.js",
@@ -22,6 +22,7 @@
   "homepage": "https://github.com/robabby/woodstockdreamer#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "concurrently": "^3.5.1",
     "express": "^4.16.2",
     "nodemon": "^1.12.1",
     "superagent": "^3.8.1"
