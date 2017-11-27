@@ -1,17 +1,14 @@
 import Route from '@ember/routing/route';
+import { computed } from '@ember/object';
 
 export default Route.extend({
   model(params) {
-    let { userId } = this.paramsFor('user');
-    this.get('store').findRecord('user', userId,  {
-      include: 'orders'
-    });
+    const { orderId } = params;
+    const { userId } = this.paramsFor('user');
 
     return Ember.RSVP.hash({
-      user: this.get('store').findRecord('user', userId, {
-        include: 'orders'
-      }),
-      order: this.store.peekRecord('order', userId)
+      user: this.store.peekRecord('user', userId),
+      order: this.store.findRecord('order', orderId, { include: userId })
     });
   }
 });
