@@ -18,4 +18,4 @@ HEALTHCHECK --interval=5s \
 
 EXPOSE 3000
 
-CMD [ "npm", "server" ]
+CMD [ "npm", "run", "server" ]
