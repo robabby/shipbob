@@ -15,10 +15,8 @@ View and manage your orders on the internet!
 
 * clone the repo locally `git clone https://github.com/robabby/shipbob.git`
 * install ember-cli as a global `npm i -g ember-cli || yarn global ember-cli`
-* cd into the client directory `cd shipbob/client`
-* Build the client files `ember build --environment=production --output-path=../public/`
-* Build the Docker container `docker build -t robabby/shipbob .`
-* Run it `docker run -p 8080:3000 -d robabby/shipbob:latest`
+* Give the `docker.sh` file permissions with `chmod 755 docker.sh`
+* Then run `yarn docker || npm run docker`
 
 ### Other things I would have done
 
