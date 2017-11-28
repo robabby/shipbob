@@ -33,7 +33,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    ENV.APP.apiURL = "http://localhost:3000";
+    // ENV.APP.apiURL = "http://localhost:3000";
   }
 
   if (environment === 'test') {
@@ -49,7 +49,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
-    ENV.APP.apiURL = "http://127.0.0.1:3000"
+    // ENV.APP.apiURL = "http://127.0.0.1:3000"
   }
 
   return ENV;

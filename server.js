@@ -23,13 +23,15 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 // set our port
-var port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
+
 
 // set the static files location
 app.use(express.static(__dirname + '/public'));
 
 require('./routes')(app); // configure our routes
 
+console.log('app is listening on port: ', port);
 // startup our app at http://localhost:3000
 app.listen(port);
 
